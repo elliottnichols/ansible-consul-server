@@ -41,7 +41,7 @@
     dest: /etc/consul.d/consul.hcl
     owner: root
     group: root
-    mode: "0744"
+    mode: "0766"
 
 - name: Create server.hcl from template
   template:
@@ -49,4 +49,4 @@
     dest: /etc/consul.d/server.hcl
     owner: root
     group: root
-    mode: "0744"
+    mode: "0766"
