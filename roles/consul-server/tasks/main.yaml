@@ -16,16 +16,16 @@
   file:
     path: /opt/consul
     state: directory
-    owner: consul
-    group: consul
+    owner: root
+    group: root
     mode: "0755"
 
 - name: Create /etc/consul.d
   file:
     path: /etc/consul.d
     state: directory
-    owner: consul
-    group: consul
+    owner: root
+    group: root
     mode: "0755"
 
 - name: Create consul.service for systemctl
@@ -39,10 +39,10 @@
   template:
     src: ./templates/consul.hcl.j2
     dest: /etc/consul.d/consul.hcl
-    mode: "0640"
+    mode: "0744"
 
 - name: Create server.hcl from template
   template:
     src: ./templates/server.hcl.j2
     dest: /etc/consul.d/server.hcl
-    mode: "0640"
+    mode: "0744"
