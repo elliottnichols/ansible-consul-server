@@ -28,12 +28,12 @@
     group: root
     mode: "0755"
 
-# - name: Create consul.service for systemctl
-#   copy:
-#     src: ./files/consul.service
-#     dest: /etc/systemd/system/consul.service
-#     owner: root
-#     group: root
+- name: Create consul.service for systemctl
+  copy:
+    src: ./files/consul.service
+    dest: /etc/systemd/system/consul.service
+    owner: root
+    group: root
 
 - name: Create consul.hcl from template
   template:
