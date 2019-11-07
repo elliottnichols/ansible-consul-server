@@ -12,13 +12,12 @@
     system: true
     groups: consul
 
-# - name: Create /opt/consul directory
-#   file:
-#     path: /opt/consul
-#     state: directory
-#     owner: root
-#     group: root
-#     mode: "0755"
+- name: Create /opt/consul directory
+  file:
+    path: /opt/consul
+    state: directory
+    owner: consul
+    group: consul
 
 # - name: Create /etc/consul.d
 #   file:
