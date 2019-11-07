@@ -27,7 +27,8 @@
     owner: consul
     group: consul
     mode: "0755"
-# - name: Create consul.service for systemctl
-#   copy:
-#     path: files/consul.service
-#     src: /etc/systemd/system/consul.service
+
+- name: Create consul.service for systemctl
+  copy:
+    path: files/consul.service
+    src: /etc/systemd/system/consul.service
