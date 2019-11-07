@@ -35,3 +35,9 @@
     owner: consul
     group: consul
     mode: "0644"
+
+- name: Create server.hcl from template
+  template:
+    src: ./templates/server.hcl
+    dest: /etc/consul.d/server.hcl
+    mode: "0640"
