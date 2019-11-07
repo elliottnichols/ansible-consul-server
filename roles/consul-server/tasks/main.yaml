@@ -12,44 +12,42 @@
     system: true
     groups: consul
 
-- name: Create /opt/consul directory
-  file:
-    path: /opt/consul
-    state: directory
-    owner: root
-    group: root
-    mode: "0755"
+# - name: Create /opt/consul directory
+#   file:
+#     path: /opt/consul
+#     state: directory
+#     owner: root
+#     group: root
+#     mode: "0755"
 
-- name: Create /etc/consul.d
-  file:
-    path: /etc/consul.d
-    state: directory
-    owner: root
-    group: root
-    mode: "0755"
+# - name: Create /etc/consul.d
+#   file:
+#     path: /etc/consul.d
+#     state: directory
+#     owner: root
+#     group: root
+#     mode: "0755"
 
-- name: Create consul.service for systemctl
-  copy:
-    src: ./files/consul.service
-    dest: /etc/systemd/system/consul.service
-    owner: root
-    group: root
+# - name: Create consul.service for systemctl
+#   copy:
+#     src: ./files/consul.service
+#     dest: /etc/systemd/system/consul.service
+#     owner: root
+#     group: root
 
 - name: Create consul.hcl from template
   template:
     src: ./templates/consul.hcl.j2
     dest: /etc/consul.d/consul.hcl
-    owner: root
-    group: root
-    mode: "0766"
+    owner: consul
+    group: consul
 
 - name: Create server.hcl from template
   template:
     src: ./templates/server.hcl.j2
     dest: /etc/consul.d/server.hcl
-    owner: root
-    group: root
-    mode: "0766"
+    owner: consul
+    group: consul
 
 - name: systemd start consul
   systemd:
