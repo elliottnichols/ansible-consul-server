@@ -1,8 +1,6 @@
 ---
 - hosts: localhost
   gather_facts: true
-  pre_tasks:
-    - ec2_instance_info
   roles:
     - consul-server
   become: true
