@@ -3,7 +3,10 @@
   gather_facts: true
   pre_tasks:
     - setup:
-      gather_subset: !facter ,!ohai,network
+      gather_subset:
+        - facter
+        - ohai
+        - network
   roles:
     - consul-server
   become: true
