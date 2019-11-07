@@ -1,0 +1,7 @@
+datacenter = "aws-us-east-1"
+data_dir = "/opt/consul"
+encrypt = "{{gossip_key}}"
+retry_join = ["provider=aws tag_key=role tag_value=consul-{{consul_type}}"]
+performance {
+  raft_multiplier = 5
+}

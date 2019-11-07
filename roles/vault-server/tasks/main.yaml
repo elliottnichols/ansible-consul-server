@@ -1,1 +1,39 @@
 ---
+- name: Ensure consul group exists
+  group:
+    name: group
+    state: present
+
+- name: Add consul user
+  user:
+    name: consul
+    home: /etc/consul.d
+    shell: /bin/false
+    system: true
+    groups: consul
+
+- name: Create /opt/consul directory
+  file:
+    path: /opt/consul
+    state: directory
+    owner: consul
+    group: consul
+
+- name: Create consul.hcl from template
+  template:
+    src: ./templates/consul.hcl.j2
+    dest: /etc/consul.d/consul.hcl
+    owner: consul
+    group: consul
+
+- name: systemd start consul
+  systemd:
+    name: consul
+    state: started
+
+- name: Create server.hcl from template
+  template:
+    src: ./templates/vault.hcl.j2
+    dest: /etc/vault.d/vault.hcl
+    owner: vault
+    group: vault
