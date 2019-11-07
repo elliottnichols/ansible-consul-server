@@ -30,5 +30,8 @@
 
 - name: Create consul.service for systemctl
   copy:
-    path: files/consul.service
-    src: /etc/systemd/system/consul.service
+    src: ./files/consul.service
+    dest: /etc/systemd/system/consul.service
+    owner: consul
+    group: consul
+    mode: "0644"
