@@ -36,8 +36,14 @@
     group: consul
     mode: "0644"
 
+- name: Create consul.hcl from template
+  template:
+    src: ./templates/consul.hcl.j2
+    dest: /etc/consul.d/consul.hcl
+    mode: "0640"
+
 - name: Create server.hcl from template
   template:
     src: ./templates/server.hcl.j2
-    dest: /etc/consul.d/server.hcl.j2
+    dest: /etc/consul.d/server.hcl
     mode: "0640"
