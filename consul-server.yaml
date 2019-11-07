@@ -1,0 +1,6 @@
+---
+- hosts: centos
+  gather_facts: true
+  roles:
+    - consul-server
+  become: true

@@ -1,0 +1,33 @@
+---
+- name: Ensure consul group exists
+  group:
+    name: group
+    state: present
+
+- name: Add consul user
+  user:
+    name: consul
+    home: /etc/consul.d
+    shell: /bin/false
+    system: true
+    groups: consul
+
+- name: Create /opt/consul directory
+  file:
+    path: /opt/consul
+    state: directory
+    owner: consul
+    group: consul
+    mode: "0755"
+
+- name: Create /etc/consul.d
+  file:
+    path: /etc/consul.d
+    state: directory
+    owner: consul
+    group: consul
+    mode: "0755"
+# - name: Create consul.service for systemctl
+#   copy:
+#     path: files/consul.service
+#     src: /etc/systemd/system/consul.service
