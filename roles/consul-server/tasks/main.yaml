@@ -32,9 +32,8 @@
   copy:
     src: ./files/consul.service
     dest: /etc/systemd/system/consul.service
-    owner: consul
-    group: consul
-    mode: "0644"
+    owner: root
+    group: root
 
 - name: Create consul.hcl from template
   template:
