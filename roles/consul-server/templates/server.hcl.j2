@@ -7,7 +7,7 @@ acl {
   default_policy = "allow"
   enable_token_replication = true
   enable_token_persistence = true
-  down_policy    = “extend-cache”
+  down_policy = "extend-cache”
   tokens {
     master = {{master_token}}
     agent = {{consul_agent_server_token}}
