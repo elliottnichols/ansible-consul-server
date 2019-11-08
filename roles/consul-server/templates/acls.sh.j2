@@ -77,6 +77,6 @@ operator_prefix "" {
 
 consul acl token create -description "consul agent vault token" -policy-name consul-agent-vault -secret {{ consul_agent_vault_token}}
 consul acl token create -description "consul agent server token" -policy-name consul-agent-server -secret {{consul_agent_server_token}}
-consul acl token create -description "vault application token" -policy-name vault -secret ((vault_token))
+consul acl token create -description "vault application token" -policy-name vault -secret {{vault_token}}
 consul acl token create -description "consul snapshot agent" -policy-name snapshot_agent -secret {{snapshot_agent_token}}
 consul acl token update -id anonymous -policy-name anonymous -secret {{anonymous_token}}
