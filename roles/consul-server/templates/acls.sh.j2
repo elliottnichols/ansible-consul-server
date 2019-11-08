@@ -1,0 +1,82 @@
+#!/bin/bash
+export CONSUL_HTTP_TOKEN={{master_token}}
+
+echo '
+node_prefix "" {
+  policy = "write"
+}
+service_prefix "" {
+  policy = "read"
+}
+agent_prefix "" {
+  policy = "write"
+}' | consul acl policy create -name consul-agent-vault
+
+echo '
+node_prefix "" {
+  policy = "write"
+}
+service_prefix "" {
+  policy = "read"
+}
+service "consul" {
+  policy = "write"
+}
+agent_prefix "" {
+  policy = "write"
+}' | consul acl policy create -name consul-agent-server
+
+echo '
+key_prefix "vault/" {
+  policy = "write"
+}
+service "vault" {
+  policy = "write"
+}
+session_prefix "" {
+  policy = "write"
+}
+node_prefix "" {
+  policy = "write"
+}
+agent_prefix "" {
+  policy = "write"
+}' | consul acl policy create -name vault
+
+echo '
+acl = "write"
+key "consul-snapshot/lock" {
+ policy = "write"
+}
+session_prefix "" {
+ policy = "write"
+}
+service "consul-snapshot" {
+ policy = "write"
+}' | consul acl policy create -name snapshot_agent
+
+echo '
+node_prefix "" {
+  policy = "read"
+}
+service_prefix "" {
+  policy = "read"
+}
+session_prefix "" {
+  policy = "read"
+}
+agent_prefix "" {
+  policy = "read"
+}
+query_prefix "" {
+  policy = "read"
+}
+operator_prefix "" {
+  policy = "read"
+}' |  consul acl policy create -name anonymous
+
+consul acl token create -description "consul agent vault token" -policy-name consul-agent-vault -secret {{ consul_agent_vault_token}}
+consul acl token create -description "consul agent server token" -policy-name consul-agent-server -secret {{consul_agent_server_token}}
+consul acl token create -description "vault application token" -policy-name vault -secret ((vault_token))
+consul acl token create -description "consul snapshot agent" -policy-name snapshot_agent -secret {{snapshot_agent_token}}
+consul acl token update -id anonymous -policy-name anonymous -secret {{anonymous_token}}
