@@ -37,3 +37,8 @@
     dest: /etc/vault.d/vault.hcl
     owner: vault
     group: vault
+
+- name: systemd start vault
+  systemd:
+    name: vault
+    state: started

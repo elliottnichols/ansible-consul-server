@@ -19,21 +19,6 @@
     owner: consul
     group: consul
 
-# - name: Create /etc/consul.d
-#   file:
-#     path: /etc/consul.d
-#     state: directory
-#     owner: root
-#     group: root
-#     mode: "0755"
-
-# - name: Create consul.service for systemctl
-#   copy:
-#     src: ./files/consul.service
-#     dest: /etc/systemd/system/consul.service
-#     owner: root
-#     group: root
-
 - name: Create consul.hcl from template
   template:
     src: ./templates/consul.hcl.j2
@@ -52,3 +37,15 @@
   systemd:
     name: consul
     state: started
+
+# - name: create an ACL with rules
+#   consul_acl:
+#     host: localhost:8500
+#     mgmt_token: {{ master_token }}
+#     token: {{ consul-agent-vault }}
+#     name: consul-agent-vault
+#     rules:
+#       - key: "foo"
+#         policy: read
+#       - key: "private/foo"
+#         policy: deny
