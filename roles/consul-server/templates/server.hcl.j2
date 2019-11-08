@@ -9,7 +9,7 @@ acl {
   enable_token_persistence = true
   down_policy = "extend-cache"
   tokens {
-    master = {{master_token}}
-    agent = {{consul_agent_server_token}}
+    master = "{{master_token}}"
+    agent = "{{consul_agent_server_token}}"
   }
 }
