@@ -47,5 +47,7 @@
     mode: 0744
 
 - name: Run acl script
-  script: /home/centos/acl.sh 
+  script: /home/centos/acl.sh
+  chdir: /home/centos
+
 
